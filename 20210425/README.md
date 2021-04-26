@@ -1,6 +1,6 @@
 ### 本次case主要是完成了java对象在native层中的创建，属性值的初始化。代码具体在 main.cpp：
 ```
-    # 获取class,    和java中的反射 Class.forName("") 异曲同工之妙
+    # 获取class, 和java中的反射 Class.forName("") 有异曲同工之妙
     jclass FindClass(const char *name) {
         return functions->FindClass(this, name);
     }
@@ -9,7 +9,7 @@
                           const char *sig) {
         return functions->GetMethodID(this,clazz,name,sig);
     }
-   # 构建对象的几个方法，目的一样，只要是构建对象时构造函数参数不一样，这里提供了不一样的参数的方法
+   # 构建对象的几个方法，目的一样，只是构建对象时构造函数参数不一样，这里提供了不一样的参数的方法
     jobject NewObject(jclass clazz, jmethodID methodID, ...) {
         va_list args;
         jobject result;
@@ -65,3 +65,4 @@
     jboolean = env->CallStaticBooleanMethod(jclass,methidID,args);
 
 ```
+### 可见所有对java层的操作都是通过JNIEnv这个接口来完成。另外这些操作java的方法全都是以大写字母开头，一开始还有点适应不了。
