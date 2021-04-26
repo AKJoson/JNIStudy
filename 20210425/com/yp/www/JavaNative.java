@@ -17,4 +17,8 @@ public class JavaNative{
     public native Person createPerson();
 
     public native void invokeJavaMethod();
+
+    public native int[] testIntArray(boolean[] arrays);
+
+    public native String[] testStringArray(String[] arrays);
 }

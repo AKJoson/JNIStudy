@@ -47,6 +47,22 @@ JNIEXPORT jobject JNICALL Java_com_yp_www_JavaNative_createPerson
 JNIEXPORT void JNICALL Java_com_yp_www_JavaNative_invokeJavaMethod
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_yp_www_JavaNative
+ * Method:    testIntArray
+ * Signature: ([Z)[I
+ */
+JNIEXPORT jintArray JNICALL Java_com_yp_www_JavaNative_testIntArray
+  (JNIEnv *, jobject, jbooleanArray);
+
+/*
+ * Class:     com_yp_www_JavaNative
+ * Method:    testStringArray
+ * Signature: ([Ljava/lang/String;)[Ljava/lang/String;
+ */
+JNIEXPORT jobjectArray JNICALL Java_com_yp_www_JavaNative_testStringArray
+  (JNIEnv *, jobject, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif

@@ -81,4 +81,23 @@ JNIEXPORT void JNICALL Java_com_yp_www_JavaNative_invokeJavaMethod(JNIEnv* env,j
   cout << "Running java code finish, the result from java is:" << a << endl;
 
 }
+JNIEXPORT jintArray JNICALL Java_com_yp_www_JavaNative_testIntArray(JNIEnv* env,jobject object,jbooleanArray booleanArray)
+{
+    cout << "#Test the jbooleanArray" << endl;
+    jboolean* pBooleanArrays =  env->GetBooleanArrayElements(booleanArray,0);
+    jsize size = env->GetArrayLength(booleanArray);
+    for(int i = 0;i<size;i++)
+    {
+        cout << "index: " << i << " value is : " << (int)(*(pBooleanArrays+i)) << endl;
+    }
 
+    env->ReleaseBooleanArrayElements(booleanArray,pBooleanArrays,0);
+
+    jintArray mIntArray = env->NewIntArray(10);
+    //void SetIntArrayRegion(jintArray array, jsize start, jsize len,const jint *buf)
+    for(int i =0;i<10;i++)
+    {
+        env->SetIntArrayRegion(mIntArray,i,1,&i);
+    }
+    return mIntArray;
+}

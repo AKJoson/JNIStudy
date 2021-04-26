@@ -66,3 +66,30 @@
 
 ```
 ### 可见所有对java层的操作都是通过JNIEnv这个接口来完成。另外这些操作java的方法全都是以大写字母开头，一开始还有点适应不了。
+## 数组的操作:
+### 1. 基本数据类型的数组:
+```
+JNIEXPORT jintArray JNICALL Java_com_yp_www_JavaNative_testIntArray(JNIEnv* env,jobject object,jbooleanArray booleanArray)
+{
+    cout << "#Test the jbooleanArray" << endl;
+    //任意基本类型都有对用的Get***ArrayElements()
+    jboolean* pBooleanArrays =  env->GetBooleanArrayElements(booleanArray,0);
+    jsize size = env->GetArrayLength(booleanArray);
+    for(int i = 0;i<size;i++)
+    {   //你就说这个移动指针的动作潇洒不潇洒就完了！
+        cout << "index: " << i << " value is : " << (int)(*(pBooleanArrays+i)) << endl;
+    }
+
+   env->ReleaseBooleanArrayElements(booleanArray,pBooleanArrays,0);
+    //主动创建一个基本数据类型int的数组
+   jintArray mIntArray = env->NewIntArray(10);
+   //void SetIntArrayRegion(jintArray array, jsize start, jsize len,const jint *buf)
+   for(int i =0;i<10;i++)
+   {    // 设置值，一样的 有Set***ArrayRegion()的方法来设置值。
+      env->SetIntArrayRegion(mIntArray,i,1,&i);
+   }
+   return mIntArray; //返回
+  }
+
+```
+2.引用数据类型的数组
