@@ -15,4 +15,6 @@ public class JavaNative{
 
     //Create Person object by native code!
     public native Person createPerson();
+
+    public native void invokeJavaMethod();
 }

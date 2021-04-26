@@ -47,3 +47,38 @@ JNIEXPORT jobject JNICALL Java_com_yp_www_JavaNative_createPerson(JNIEnv* env,jo
    //返回
    return  personObject;
 }
+
+JNIEXPORT void JNICALL Java_com_yp_www_JavaNative_invokeJavaMethod(JNIEnv* env,jobject object)
+{
+    cout << "#C/C++ , prepare invoke java method" << endl;
+    //创建目标对象
+    //拿到jclass
+   jclass targetClass =  env->FindClass("com/yp/www/JniMethodInvoke");
+   //构造函数
+   jmethodID initMethodID = env->GetMethodID(targetClass,"<init>","()V");
+   //创建object
+   jobject targetObject = env->NewObject(targetClass,initMethodID);
+
+   //准备执行目标方法
+   //1. 获取目标方法
+  jmethodID funnyMethodID = env->GetMethodID(targetClass,"funnyMethod","()I"); 
+  // 2. 执行
+  jint resultValue = env->CallIntMethod(targetObject,funnyMethodID);
+
+  //执行静态方法
+  jmethodID staticMethodID = env->GetStaticMethodID(targetClass,"funnyStaticMethod","()Z");
+  //调用静态方法就只需要jclass就可以了，不需要明确是哪个object
+  jboolean booleanValue = env->CallStaticBooleanMethod(targetClass,staticMethodID);
+  int a = 0;
+  if(booleanValue)
+  {
+    a = 1;
+  }else
+  {
+    a = 0;
+  }
+  cout << "The static java method invode result: " << endl;
+  cout << "Running java code finish, the result from java is:" << a << endl;
+
+}
+

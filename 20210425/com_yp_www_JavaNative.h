@@ -39,6 +39,14 @@ JNIEXPORT jint JNICALL Java_com_yp_www_JavaNative_calculateStringLength
 JNIEXPORT jobject JNICALL Java_com_yp_www_JavaNative_createPerson
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_yp_www_JavaNative
+ * Method:    invokeJavaMethod
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_yp_www_JavaNative_invokeJavaMethod
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

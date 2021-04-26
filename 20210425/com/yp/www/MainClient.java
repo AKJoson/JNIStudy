@@ -12,5 +12,7 @@ public class MainClient{
 
         Person nativePerson = javaNative.createPerson();
         nativePerson.toString();
+
+        javaNative.invokeJavaMethod();
    }
 }
