@@ -49,5 +49,19 @@
       void SetIntField(jobject obj, jfieldID fieldID,
                      jint val) {
         functions->SetIntField(this,obj,fieldID,val);
-    }      
+    }
+
+    # Native层调用java的方法，两种：静态和非静态
+    //非静态 方法调用
+    //获取jobject,可能需要先获取FindClass 拿到jclass
+    jobject = env->NewObject(jclass,methodID,args)
+    //获取methodID
+    jmethodID methodID = env->GetMethodID(jobject,"methodName","()V");
+    jnit resultValue = env->CallIntMethod(jobject,method,args);
+    
+    //静态 方法调用
+    //获取静态方法methodID
+    jmethodID = env->GetStaticMethodID(jclass,"methodName","()V");
+    jboolean = env->CallStaticBooleanMethod(jclass,methidID,args);
+
 ```
